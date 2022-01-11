@@ -27,17 +27,7 @@ app.get(`/properties/add/`, (req, res) => {
   // res.send(`GET: /properties/add`);
   res.render(`properties/newPropertyForm`);
 });
-app.post(
-  `/properties/add/`,
-  validatePropertyJOI,
-  catchAsync(async (req, res, err) => {
-    // processing the form submitted data to generate a property object
-    const { generatePropertyFromForm } = require("./seeds/helpers");
-    const newProperty = new Property({ ...generatePropertyFromForm(req.body) });
-    await newProperty.save();
-    res.redirect(`/properties/${newProperty._id}/`);
-  })
-);
+
 
 
 const  port = process.env.port || 3000;
