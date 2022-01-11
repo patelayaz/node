@@ -41,6 +41,16 @@ app.get(
     res.redirect(`/properties`);
   })
 );
+app.get(
+  `/properties/:id`,
+  catchAsync(async (req, res) => {
+    const property = await Property.findById(req.params.id);
+
+    const agent = await Agent.findOne({ agentCode: property.agentCode });
+
+    res.render(`properties/showProperty`, { property, agent });
+  })
+);
 
 
 const  port = process.env.port || 3000;
