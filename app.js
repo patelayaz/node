@@ -61,6 +61,19 @@ app.delete(
   })
 );
 
+app.get(
+  `/properties/:id/edit/`,
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+
+    // getting the property data from the DB
+    const property = await Property.findById(id);
+
+    // res.send(`GET: /properties/${id}/edit/`);
+    res.render(`properties/editPropertyForm`, { property });
+  })
+);
+
 
 const  port = process.env.port || 3000;
 app.listen(port,()=> {
