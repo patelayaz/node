@@ -16,17 +16,6 @@ const ExpressError = require(`./utils/ExpressError`);
 // initialize app to express()
 const app = express();
 
-// handling JSON and URL encoded form submissions
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// override with POST having ?_method=DELETE/PATCH
-app.use(methodOverride("_method"));
-// using morgan to log request data
-app.use(morgan(`dev`));
-
-
-
-
 // route management
 app.get(`/`, (req, res) => {
   res.render(`home`);
