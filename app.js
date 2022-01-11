@@ -6,7 +6,7 @@ const Joi = require(`joi`);
 const catchAsync = require(`./utils/catchAsync`);
 const ExpressError = require(`./utils/ExpressError`);
 // schema validation with JOI
-const { propertySchemaJOI, agentSchemaJOI } = require(`./schemas`);
+
 
 app.get('/',(req,res)=> {
     res.send("welcome to home page1");
