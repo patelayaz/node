@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express(); 
-const morgan = require(`morgan`);
+
+// connecting to the localhost mongodb server
+mongoose.connect(`mongodb://localhost:27017/propertyApp`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // custom middleware
 const catchAsync = require(`./utils/catchAsync`);
