@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express(); 
+const Joi = require(`joi`);
 
 // custom middleware
 const catchAsync = require(`./utils/catchAsync`);
