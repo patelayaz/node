@@ -8,6 +8,11 @@ const ExpressError = require(`./utils/ExpressError`);
 // schema validation with JOI
 
 
+// mongo schemas
+const Property = require(`./models/property`);
+const Agent = require(`./models/agent`);
+
+
 app.get('/',(req,res)=> {
     res.send("welcome to home page1");
 
