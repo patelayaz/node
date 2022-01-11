@@ -51,6 +51,18 @@ app.get(
     res.render(`properties/showProperty`, { property, agent });
   })
 );
+app.put(
+  `/properties/:id`,
+  validatePropertyJOI,
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const updatedProperty = await Property.findByIdAndUpdate(
+      { _id: id },
+      { ...req.body }
+    );
+    res.redirect(`/properties/${id}/`);
+  })
+);
 
 
 const  port = process.env.port || 3000;
