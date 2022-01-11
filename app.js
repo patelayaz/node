@@ -74,6 +74,22 @@ app.get(
   })
 );
 
+// 404 route
+app.all(`*`, (req, res, next) => {
+  // console.log(`🚀 ✩ In app.all: 404 route `);
+  // res.status(404).send("Resource not found");
+  next(new ExpressError(`Page not found`, 404));
+});
+
+// error handling
+app.use((err, req, res, next) => {
+  // console.log(`🚀 ✩ In app.use: Error handling `);
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = `Something went wrong`;
+  console.log(err);
+  res.status(statusCode).render(`error`, { err });
+  // res.send("Unhandled error occurred!");
+});
 
 const  port = process.env.port || 3000;
 app.listen(port,()=> {
