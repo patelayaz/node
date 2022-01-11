@@ -74,6 +74,39 @@ app.get(
   })
 );
 
+// agent routes
+app.get(
+  `/agents`,
+  catchAsync(async (req, res) => {
+    const agents = await Agent.find({});
+    res.render(`agents/index`, { agents });
+  })
+);
+app.post(`/agents/add`, validateAgentJOI, async (req, res) => {
+  console.log(`In POST: /agents/add/`);
+  // TODO: create add agent form and then fetch that data from there. Using a dummy object here to test functionality
+  const agentObject = {
+    agentCode: `testAgent`,
+    name: `test`,
+    logo: `test`,
+    address: `test`,
+    phone: `test`,
+  };
+  const newAgent = new Agent({ ...agentObject });
+  await newAgent.save();
+  res.redirect(`/agents/${newAgent._id}/`);
+});
+
+app.get(
+  `/agents/:id`,
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const agent = await Agent.findById(id);
+    const properties = await Property.find({ agentCode: agent.agentCode });
+    res.render(`agents/showAgent`, { agent, properties });
+  })
+);
+
 // 404 route
 app.all(`*`, (req, res, next) => {
   // console.log(`🚀 ✩ In app.all: 404 route `);
