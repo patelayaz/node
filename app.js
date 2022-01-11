@@ -29,6 +29,19 @@ app.get(`/properties/add/`, (req, res) => {
 });
 
 
+app.get(
+  `/properties/generate`,
+  catchAsync(async (req, res) => {
+    console.log(`In GET: /properties/generate`);
+    const { addPropertyGenerator } = require("./seeds/helpers");
+    const value = addPropertyGenerator();
+    const newProperty = new Property({ ...value });
+
+    await newProperty.save();
+    res.redirect(`/properties`);
+  })
+);
+
 
 const  port = process.env.port || 3000;
 app.listen(port,()=> {
