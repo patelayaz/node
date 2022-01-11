@@ -1,6 +1,6 @@
 const express = require('express');
-const mongoose = require(`mongoose`);
 const app = express(); 
+const methodOverride = require("method-override");
 
 // custom middleware
 const catchAsync = require(`./utils/catchAsync`);
