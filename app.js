@@ -82,20 +82,6 @@ app.get(
     res.render(`agents/index`, { agents });
   })
 );
-app.post(`/agents/add`, validateAgentJOI, async (req, res) => {
-  console.log(`In POST: /agents/add/`);
-  // TODO: create add agent form and then fetch that data from there. Using a dummy object here to test functionality
-  const agentObject = {
-    agentCode: `testAgent`,
-    name: `test`,
-    logo: `test`,
-    address: `test`,
-    phone: `test`,
-  };
-  const newAgent = new Agent({ ...agentObject });
-  await newAgent.save();
-  res.redirect(`/agents/${newAgent._id}/`);
-});
 
 app.get(
   `/agents/:id`,
