@@ -1,11 +1,9 @@
 const express = require('express');
 const app = express(); 
 
-
 // custom middleware
 const catchAsync = require(`./utils/catchAsync`);
 const ExpressError = require(`./utils/ExpressError`);
-// schema validation with JOI
 
 
 // mongo schemas
