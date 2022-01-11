@@ -51,16 +51,13 @@ app.get(
     res.render(`properties/showProperty`, { property, agent });
   })
 );
-app.put(
+app.delete(
   `/properties/:id`,
-  validatePropertyJOI,
   catchAsync(async (req, res) => {
+    console.log(`DELETE REQUEST`);
     const { id } = req.params;
-    const updatedProperty = await Property.findByIdAndUpdate(
-      { _id: id },
-      { ...req.body }
-    );
-    res.redirect(`/properties/${id}/`);
+    await Property.findByIdAndDelete(id);
+    res.redirect(`/properties/`);
   })
 );
 
