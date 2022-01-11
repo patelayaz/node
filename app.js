@@ -16,16 +16,6 @@ const ExpressError = require(`./utils/ExpressError`);
 // initialize app to express()
 const app = express();
 
-// using eja-mate engine
-app.engine(`ejs`, ejsMate);
-// setting ejs template engine and views base folder
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, `views`));
-
-// make /public accessible
-const publicDirectoryPath = path.join(__dirname, "./assets");
-app.use(express.static(publicDirectoryPath));
-
 // handling JSON and URL encoded form submissions
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,31 +24,8 @@ app.use(methodOverride("_method"));
 // using morgan to log request data
 app.use(morgan(`dev`));
 
-// using Joi to validate schema
-const validatePropertyJOI = (req, res, next) => {
-  const result = propertySchemaJOI.validate(req.body);
-  // console.log(`🚀 ✩ catchAsync ✩ result`, result);
-  const { error } = result;
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(`,`);
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
 
-const validateAgentJOI = (req, res, next) => {
-  // console.log(`In validateAgentJOI`);
-  const result = agentSchemaJOI.validate(req.body);
-  // console.log(`🚀 ✩ catchAsync ✩ result`, result);
-  const { error } = result;
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(`,`);
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
+
 
 // route management
 app.get(`/`, (req, res) => {
@@ -199,7 +166,7 @@ app.use((err, req, res, next) => {
   // res.send("Unhandled error occurred!");
 });
 
-// starting the server
-app.listen(3000, () => {
-  console.log(`Serving on port 3000`);
-});
+const  port = process.env.port || 3000;
+app.listen(port,()=> {
+    console.log("guc");
+}); 
