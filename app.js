@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express(); 
 
+// custom middleware
+const catchAsync = require(`./utils/catchAsync`);
+const ExpressError = require(`./utils/ExpressError`);
+
 app.get('/',(req,res)=> {
     res.send("welcome to home page1");
 
