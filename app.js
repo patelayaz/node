@@ -1,34 +1,17 @@
 const express = require("express");
-const path = require(`path`);
-const mongoose = require(`mongoose`);
-const methodOverride = require("method-override");
-const morgan = require(`morgan`);
-const ejsMate = require(`ejs-mate`);
-const Joi = require(`joi`);
+
 
 // custom middleware
 const catchAsync = require(`./utils/catchAsync`);
 const ExpressError = require(`./utils/ExpressError`);
 
-// schema validation with JOI
-const { propertySchemaJOI, agentSchemaJOI } = require(`./schemas`);
 
-// mongo schemas
-const Property = require(`./models/property`);
-const Agent = require(`./models/agent`);
 
-// connecting to the localhost mongodb server
-mongoose.connect(`mongodb://localhost:27017/propertyApp`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
-// setting up mongoose to connect to mongodb
-const db = mongoose.connection;
-db.on(`error`, console.error.bind(console.log(`MongoDB connection error`)));
-db.once(`open`, () => {
-  console.log(`MongoDB connected`);
-});
+
+
+
+
 
 // initialize app to express()
 const app = express();
